@@ -1,0 +1,65 @@
+---
+title: "initial eda"
+author: "margaret"
+date: "4/4/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load-pkgs}
+library(tidyverse)
+library(spotifyr)
+library(billboard)
+```
+
+```{r data}
+access_token <- get_spotify_access_token()
+```
+
+```{r}
+data1 <- spotify_track_data
+data2 <- wiki_hot_100s
+
+data <- full_join(
+  spotify_track_data, wiki_hot_100s,
+  by = c("artist_name" = "artist", "track_name" = "title")
+)
+```
+
+```{r}
+data2 <- data2 %>%
+  mutate(
+    featured = str_extract(title, "(?<=featuring ).*"),
+    cleaned_track = 
+      ifelse(str_detect(title, "featuring"), 
+             str_extract(title, ".*( featuring*)"), title) %>%
+      str_to_upper()
+  )
+data1 <- data1 %>%
+  mutate(
+    cleaned_track = track_name %>%
+      str_replace("&", "and") %>%
+      str_to_upper()
+  )
+data <- right_join(
+  data1, data2,
+  by = c("artist_name" = "artist", "cleaned_track" = "cleaned_track")
+)
+```
+
+```{r}
+data %>%
+  drop_na(no) %>%
+  group_by(artist_name) %>%
+  summarize(
+    mean_place = mean(as.numeric(no)),
+    count = n(),
+    most_recent = max(as.numeric(year.y))
+  ) %>%
+  filter(count > 5) %>%
+  arrange(desc(count))
+```
+
