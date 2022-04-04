@@ -6,7 +6,7 @@ class Index extends Component {
 		return (
             <>
                 <div className="bg-light min-vh-100 px-4">
-                    <div className="row main-container flex-wrap">
+                    <div id="intro" className="row main-container flex-wrap">
                         <div className="col">
                             <h2 className="py-4">Exploring Music Over the Years</h2>
                             <p>
@@ -14,13 +14,13 @@ class Index extends Component {
                             </p>
                         </div>
                         <div className="col py-4 text-end">
-                            <h4>Introduction</h4>
-                            <h4>Evolution of Music Genres</h4>
-                            <h4>Popular Artists</h4>
-                            <h4>Common Patterns in Lyrics</h4>
+                            <a href="#intro" className="text-decoration-none"><h4>Introduction</h4></a>
+                            <a href="#evolution" className="text-decoration-none"><h4>Evolution of Music Genres</h4></a>
+                            <a href="#artists" className="text-decoration-none"><h4>Popular Artists</h4></a>
+                            <a href="#lyrics" className="text-decoration-none"><h4>Common Patterns in Lyrics</h4></a>
                         </div>
                     </div>
-                    <hr></hr>
+                    <hr id="evolution"></hr>
                     <div className="row main-container flex-wrap">
                         <div className="col">
                             <h3 className="py-2">Evolution of Music Genres</h3>
@@ -31,7 +31,7 @@ class Index extends Component {
                         <div className="col py-4 text-end">
                         </div>
                     </div>
-                    <hr></hr>
+                    <hr id="artists" ></hr>
                     <div className="row main-container flex-wrap">
                         <div className="col">
                             <h3 className="py-2">Popular Artists</h3>
@@ -42,7 +42,7 @@ class Index extends Component {
                         <div className="col py-4 text-end">
                         </div>
                     </div>
-                    <hr></hr>
+                    <hr id="lyrics"></hr>
                     <div className="row main-container flex-wrap">
                         <div className="col">
                             <h3 className="py-2">Common Patterns in Lyrics</h3>
