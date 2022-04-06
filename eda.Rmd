@@ -60,6 +60,85 @@ data %>%
     most_recent = max(as.numeric(year.y))
   ) %>%
   filter(count > 5) %>%
-  arrange(desc(count))
+  arrange(desc(count), desc(mean_place))
 ```
 
+```{r}
+track_data <- inner_join(
+  data, 
+  tracks,
+  by = c("track_id" = "id")
+)
+
+big_data <- left_join(track_data, artists, by = c("artist_id" = "id"))
+```
+
+```{r}
+track_data %>%
+ filter(as.numeric(no) < 11 & popularity != "0") %>%
+  ggplot(
+    aes(
+      x = as.numeric(year.x), y = as.numeric(popularity)
+    )
+  ) +
+  geom_smooth() +
+  geom_point()
+```
+```{r}
+artist_year <- track_data %>%
+  group_by(artist_id) %>%
+  summarize(latest_release = max(as.numeric(year.x))) %>%
+  inner_join(artists, by = c("artist_id" = "id")) %>%
+  group_by(latest_release)
+```
+
+```{r}
+genres <- artist_year %>%
+  pull(genres) %>%
+  flatten() %>%
+  unlist() %>%
+  tibble() %>%
+  distinct()
+```
+
+```{r}
+artist_year %>%
+  pull(genres) %>%
+  flatten() %>%
+  unlist() %>%
+  tibble() %>%
+  rename("genre" = ".") %>%
+  count(genre) %>%
+  arrange(desc(n)) %>%
+  slice(1:25) %>%
+  ggplot(aes(y = fct_inorder(genre, n), x = n)) +
+  geom_col()
+```
+```{r}
+artist_year %>%
+  pull(genres) %>%
+  flatten() %>%
+  unlist() %>%
+  tibble() %>%
+  rename("genre" = ".") %>%
+  mutate(
+    simple_genre = case_when(
+      str_detect(genre, "pop") ~ "pop",
+      str_detect(genre, "rock") ~ "rock",
+      str_detect(genre, "r&b") | str_detect(genre, "rhythm and blues") ~ "r&b",
+      str_detect(genre, "soul") ~ "soul",
+      str_detect(genre, "country") ~ "country",
+      str_detect(genre, "punk") ~ "punk",
+      str_detect(genre, "jazz") ~ "jazz",
+      str_detect(genre, "folk") ~ "folk",
+      str_detect(genre, "rap") ~ "rap",
+      str_detect(genre, "dance") ~ "dance",
+      TRUE ~ "other"
+    )
+  ) %>%
+  count(simple_genre) %>%
+  arrange(desc(n)) %>%
+  # slice(1:25) %>%
+  ggplot(aes(y = fct_inorder(simple_genre, n), x = n)) +
+  geom_col()
+```
