@@ -2,7 +2,7 @@
 title: "initial eda"
 author: "margaret"
 date: "4/4/2022"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(spotifyr)
 library(billboard)
+library(tidytext)
 ```
 
 ```{r data}
@@ -22,7 +23,9 @@ access_token <- get_spotify_access_token()
 ```{r}
 data1 <- spotify_track_data
 data2 <- wiki_hot_100s
-
+tracks <- read_csv("track_info.csv")
+artists <- read_csv("artist_info.csv")
+long_genres <- read_csv("artist_genres.csv")
 data <- full_join(
   spotify_track_data, wiki_hot_100s,
   by = c("artist_name" = "artist", "track_name" = "title")
@@ -73,7 +76,7 @@ track_data <- inner_join(
 big_data <- left_join(track_data, artists, by = c("artist_id" = "id"))
 ```
 
-```{r}
+```{r cache = T}
 track_data %>%
  filter(as.numeric(no) < 11 & popularity != "0") %>%
   ggplot(
@@ -81,46 +84,40 @@ track_data %>%
       x = as.numeric(year.x), y = as.numeric(popularity)
     )
   ) +
-  geom_smooth() +
-  geom_point()
+  geom_smooth(se = F) +
+  geom_point() +
+  labs(
+    x = "Year",
+    y = "Popularity in 2022",
+    title = "Song popularity by year produced",
+    subtitle = "As designated by spotify",
+    caption = "Billboard top 100 songs"
+  ) +
+  theme_minimal()
 ```
 ```{r}
 artist_year <- track_data %>%
   group_by(artist_id) %>%
-  summarize(latest_release = max(as.numeric(year.x))) %>%
+  summarize(
+    latest_release = max(as.numeric(year.x)),
+    med_release = median(as.numeric(year.x))
+    ) %>%
   inner_join(artists, by = c("artist_id" = "id")) %>%
   group_by(latest_release)
 ```
 
 ```{r}
-genres <- artist_year %>%
-  pull(genres) %>%
-  flatten() %>%
-  unlist() %>%
-  tibble() %>%
-  distinct()
-```
-
-```{r}
-artist_year %>%
-  pull(genres) %>%
-  flatten() %>%
-  unlist() %>%
-  tibble() %>%
-  rename("genre" = ".") %>%
+long_genres %>%
+  rename("genre" = "genres") %>%
   count(genre) %>%
   arrange(desc(n)) %>%
   slice(1:25) %>%
   ggplot(aes(y = fct_inorder(genre, n), x = n)) +
   geom_col()
 ```
-```{r}
-artist_year %>%
-  pull(genres) %>%
-  flatten() %>%
-  unlist() %>%
-  tibble() %>%
-  rename("genre" = ".") %>%
+```{r cache = T}
+long_genres %>%
+  rename("genre" = "genres") %>%
   mutate(
     simple_genre = case_when(
       str_detect(genre, "pop") ~ "pop",
@@ -133,12 +130,120 @@ artist_year %>%
       str_detect(genre, "folk") ~ "folk",
       str_detect(genre, "rap") ~ "rap",
       str_detect(genre, "dance") ~ "dance",
+      str_detect(genre, "disco") ~ "disco",
+      str_detect(genre, "funk") ~ "funk",
+      str_detect(genre, "hip hop") ~ "hip hop",
       TRUE ~ "other"
     )
   ) %>%
   count(simple_genre) %>%
   arrange(desc(n)) %>%
-  # slice(1:25) %>%
   ggplot(aes(y = fct_inorder(simple_genre, n), x = n)) +
-  geom_col()
+  geom_col() +
+  labs(
+    x = "Frequency",
+    y = "Genre",
+    title = "Frequency of dfferent genres",
+    subtitle = "By artist",
+    caption = "Billboard top 100 songs"
+  ) +
+  theme_minimal()
 ```
+
+```{r cache = T}
+long_genres %>%
+  mutate(
+    simple_genre = case_when(
+      str_detect(genres, "pop") ~ "pop",
+      str_detect(genres, "rock") ~ "rock",
+      str_detect(genres, "r&b") | str_detect(genres, "rhythm and blues") ~ "r&b",
+      str_detect(genres, "soul") ~ "soul",
+      str_detect(genres, "country") ~ "country",
+      str_detect(genres, "rap") ~ "rap",
+      str_detect(genres, "disco") ~ "disco",
+      str_detect(genres, "hip hop") ~ "hip hop",
+      TRUE ~ "other"
+    )
+  ) %>%
+  select(-genres) %>%
+  distinct() %>%
+  mutate(
+    decade = floor(med_release/10)*10,
+    simple_genre = fct_other(fct_infreq(simple_genre), drop = c("other"))
+  ) %>%
+  count(decade, simple_genre) %>%
+  ggplot(aes(x = n, y = as.factor(decade), fill = fct_rev(simple_genre))) +
+  geom_col(position = "fill") +
+  scale_fill_brewer(palette = "Set3", direction = -1) +
+  labs(
+    x = NULL, 
+    y = "Decade", 
+    fill = "Genre", 
+    title = "Popularity of genres per artist over time",
+    subtitle = "By decade",
+    caption = "Billboard top 100 songs"
+  ) +
+  guides(fill = guide_legend(nrow = 1, reverse = T)) +
+  theme_minimal() +
+  theme(legend.position = "bottom", legend.direction = "horizontal")
+```
+
+```{r  cache = T}
+track_data %>%
+  select(year.x, artist_name, track_name, popularity, album.name) %>%
+  unnest_tokens(word, track_name) %>%
+  mutate(
+    decade = as.factor(floor(as.numeric(year.x)/10)*10)
+    ) %>%
+  count(word, sort = TRUE) %>%
+  anti_join(stop_words) %>%
+  slice(1:10) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(n, word)) +
+  geom_col() +
+  labs(
+    y = "Word",
+    x = "Frequency",
+    title = "Frequency of the most common words in song titles",
+    caption = "Billboard top 100 songs"
+    ) +
+  theme_minimal()
+```
+```{r cache = T}
+common_words <- track_data %>%
+  select(year.x, artist_name, track_name, popularity, album.name) %>%
+  unnest_tokens(word, track_name) %>%
+  mutate(
+    decade = as.factor(floor(as.numeric(year.x)/10)*10)
+    ) %>%
+  count(word, sort = TRUE) %>%
+  anti_join(stop_words) %>%
+  slice(1:8) %>%
+  pull(word)
+
+track_data %>%
+  select(year.x, artist_name, track_name, popularity, album.name) %>%
+  unnest_tokens(word, track_name) %>%
+  mutate(
+    decade = as.factor(floor(as.numeric(year.x)/10)*10),
+    word = fct_infreq(word)
+    ) %>%
+  count(decade, word, sort = TRUE) %>%
+  anti_join(stop_words) %>%
+  filter(word %in% common_words) %>%
+  ggplot(aes(x = n, y = decade, fill = fct_rev(word))) +
+  geom_col(position = "fill") +
+  scale_fill_brewer(palette = "Set3", direction = -1) +
+  labs(
+    y = "Decade",
+    x = NULL,
+    fill = "Word",
+    title = "Frequency of the most common words in song titles",
+    subtitle = "By decade",
+    caption = "Billboard top 100 songs"
+    ) +
+  guides(fill = guide_legend(nrow = 1, reverse = T)) +
+  theme_minimal() +
+  theme(legend.position = "bottom", legend.direction = "horizontal")
+```
+
