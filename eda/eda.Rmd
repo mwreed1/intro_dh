@@ -16,23 +16,23 @@ library(billboard)
 library(tidytext)
 ```
 
-```{r data}
+```{r data-token}
 access_token <- get_spotify_access_token()
 ```
 
-```{r}
+```{r read-data}
 data1 <- spotify_track_data
 data2 <- wiki_hot_100s
-tracks <- read_csv("track_info.csv")
-artists <- read_csv("artist_info.csv")
-long_genres <- read_csv("artist_genres.csv")
+tracks <- read_csv("data/track_info.csv")
+artists <- read_csv("data/artist_info.csv")
+long_genres <- read_csv("data/artist_genres.csv")
 data <- full_join(
   spotify_track_data, wiki_hot_100s,
   by = c("artist_name" = "artist", "track_name" = "title")
 )
 ```
 
-```{r}
+```{r data-clean}
 data2 <- data2 %>%
   mutate(
     featured = str_extract(title, "(?<=featuring ).*"),
@@ -53,7 +53,7 @@ data <- right_join(
 )
 ```
 
-```{r}
+```{r explore-pos}
 data %>%
   drop_na(no) %>%
   group_by(artist_name) %>%
@@ -66,7 +66,7 @@ data %>%
   arrange(desc(count), desc(mean_place))
 ```
 
-```{r}
+```{r more-data-clean}
 track_data <- inner_join(
   data, 
   tracks,
@@ -76,7 +76,7 @@ track_data <- inner_join(
 big_data <- left_join(track_data, artists, by = c("artist_id" = "id"))
 ```
 
-```{r cache = T}
+```{r plot1, cache = T}
 track_data %>%
  filter(as.numeric(no) < 11 & popularity != "0") %>%
   ggplot(
@@ -95,7 +95,8 @@ track_data %>%
   ) +
   theme_minimal()
 ```
-```{r}
+
+```{r artist-year}
 artist_year <- track_data %>%
   group_by(artist_id) %>%
   summarize(
@@ -106,7 +107,7 @@ artist_year <- track_data %>%
   group_by(latest_release)
 ```
 
-```{r}
+```{r genre-bar}
 long_genres %>%
   rename("genre" = "genres") %>%
   count(genre) %>%
@@ -115,7 +116,8 @@ long_genres %>%
   ggplot(aes(y = fct_inorder(genre, n), x = n)) +
   geom_col()
 ```
-```{r cache = T}
+
+```{r simple-bar, cache = T}
 long_genres %>%
   rename("genre" = "genres") %>%
   mutate(
@@ -150,7 +152,7 @@ long_genres %>%
   theme_minimal()
 ```
 
-```{r cache = T}
+```{r decade-genre, cache = T}
 long_genres %>%
   mutate(
     simple_genre = case_when(
@@ -188,7 +190,7 @@ long_genres %>%
   theme(legend.position = "bottom", legend.direction = "horizontal")
 ```
 
-```{r  cache = T}
+```{r word-bar, cache = T}
 track_data %>%
   select(year.x, artist_name, track_name, popularity, album.name) %>%
   unnest_tokens(word, track_name) %>%
@@ -209,7 +211,8 @@ track_data %>%
     ) +
   theme_minimal()
 ```
-```{r cache = T}
+
+```{r decade-word, cache = T}
 common_words <- track_data %>%
   select(year.x, artist_name, track_name, popularity, album.name) %>%
   unnest_tokens(word, track_name) %>%
