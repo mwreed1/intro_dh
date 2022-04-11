@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import GoogleTrends from "./GoogleTrends";
 
 class Index extends Component {
 	render() {
@@ -39,15 +40,33 @@ class Index extends Component {
                     </div>
                 
                     <hr id="artists" ></hr>
+                    <div className="col w-50 header-container flex-wrap">
+                        <h3 className="py-2">Popular Artists</h3>
+                        <p>
+                            In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
+                        </p>
+                    </div>
                     <div className="row main-container flex-wrap">
-                        <div className="col">
-                            <h3 className="py-2">Popular Artists</h3>
-                            <p>
-                                In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
-                            </p>
+                        <div className="col w-50 me-4">
+                            {/* <img className="mb-4" src={require("../images/song-popularity.png")} width="100%"></img> */}
+                            <div id="widget1">
+                                <GoogleTrends
+                                type="TIMESERIES"
+                                comparisonItem={[{"keyword":"Travis Scott","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"/g/11g7ntnqs5","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"/m/02z4b_8","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"The Weeknd","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"/m/01vvydl","geo":"US","time":"2021-01-01 2021-12-31"}]}
+                                url="https://ssl.gstatic.com/trends_nrtr/2884_RC01/embed_loader.js"
+                                widget="widget1"
+                                />
+                            </div>
                         </div>
-                        <div className="col ms-4 text-end">
-                            <img src={require("../images/song-popularity.png")} width="100%"></img>
+                        <div className="col w-50 ms-4 text-end">
+                            <div id="widget2">
+                                <GoogleTrends
+                                type="GEO_MAP"
+                                comparisonItem={[{"keyword":"Travis Scott","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"/g/11g7ntnqs5","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"/m/02z4b_8","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"The Weeknd","geo":"US","time":"2021-01-01 2021-12-31"},{"keyword":"/m/01vvydl","geo":"US","time":"2021-01-01 2021-12-31"}]}
+                                url="https://ssl.gstatic.com/trends_nrtr/2884_RC01/embed_loader.js"
+                                widget="widget2"
+                                />
+                            </div>
                         </div>
                     </div>
                     <hr id="lyrics"></hr>
