@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Menu from "./components/navbar";
 import Index from "./components/index";
+import Articles from "./components/articles";
 
 class App extends Component {
 	render() {
@@ -15,10 +16,7 @@ class App extends Component {
 				<Menu />
 				<Routes>
 					<Route path="/" element={<Index />} />
-					{/* <Route path="/paint" element={<Paint />} />
-					<Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-					<Route path="/profile/:id" element={<Profile />} /> */}
+					<Route path="/articles" element={<Articles />} />
 				</Routes>
 			</div>
 		);
