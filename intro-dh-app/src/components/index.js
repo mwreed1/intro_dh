@@ -78,6 +78,7 @@ class Index extends Component {
                         </div>
                         <div className="col-auto w-25">
                             <h6 className="mb-3 fw-bold">TEAM</h6>
+                            <p className="mb-1">Dae Yang Oh</p>
                             <p className="mb-1">Kyra Chan</p>
                             <p className="mb-1">Margaret Reed</p>
                             <p className="mb-1">Trailokaya Raj Bajgain</p>
