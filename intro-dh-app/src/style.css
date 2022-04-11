@@ -6,6 +6,12 @@
     padding: 4%;
 }
 
+.header-container {
+    padding-top: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
 h6 {
     letter-spacing: 1px; 
 }

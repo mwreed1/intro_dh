@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 class Index extends Component {
 	render() {
+        
 		return (
             <>
                 <div className="bg-light min-vh-100 px-4">
@@ -21,16 +22,22 @@ class Index extends Component {
                         </div>
                     </div>
                     <hr id="evolution"></hr>
+                    <div className="col w-50 header-container flex-wrap">
+                        <h3 className="py-2">Evolution of Music Genres</h3>
+                        <p>
+                            In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
+                        </p>
+                    </div>
                     <div className="row main-container flex-wrap">
-                        <div className="col">
-                            <h3 className="py-2">Evolution of Music Genres</h3>
-                            <p>
-                                In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
-                            </p>
+                        <div className="col me-4">
+                            <img className="mb-4" src={require("../images/decade-genre.png")} width="100%"></img>
                         </div>
-                        <div className="col py-4 text-end">
+                        <div className="col ms-4 text-end">
+                            <img className="mb-4" src={require("../images/frequency-genre.png")} width="100%"></img>
+                            <img className="mb-4" src={require("../images/genre-bar.png")} width="100%"></img>
                         </div>
                     </div>
+                
                     <hr id="artists" ></hr>
                     <div className="row main-container flex-wrap">
                         <div className="col">
@@ -39,18 +46,23 @@ class Index extends Component {
                                 In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
                             </p>
                         </div>
-                        <div className="col py-4 text-end">
+                        <div className="col ms-4 text-end">
+                            <img src={require("../images/song-popularity.png")} width="100%"></img>
                         </div>
                     </div>
                     <hr id="lyrics"></hr>
+                    <div className="col w-50 header-container flex-wrap">
+                        <h3 className="py-2">Common Patterns in Lyrics</h3>
+                        <p>
+                            In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
+                        </p>
+                    </div>
                     <div className="row main-container flex-wrap">
-                        <div className="col">
-                            <h3 className="py-2">Common Patterns in Lyrics</h3>
-                            <p>
-                                In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
-                            </p>
+                        <div className="col me-4">
+                            <img className="mb-4" src={require("../images/decade-frequency-word.png")} width="100%"></img>
                         </div>
-                        <div className="col py-4 text-end">
+                        <div className="col ms-4 text-end">
+                            <img className="mb-4" src={require("../images/freq-word-song-title.png")} width="100%"></img>
                         </div>
                     </div>
                 </div>
