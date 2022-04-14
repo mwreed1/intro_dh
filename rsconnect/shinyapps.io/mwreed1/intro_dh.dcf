@@ -1,0 +1,14 @@
+name: intro_dh
+title: intro_dh
+username:
+account: mwreed1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6084695
+bundleId: 5795571
+url: https://mwreed1.shinyapps.io/intro_dh/
+when: 1649874619.47569
+lastSyncTime: 1649874619.47571
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: eda|intro-dh-app

@@ -10,9 +10,9 @@ library(tidytext)
 # Read in data
 data1 <- spotify_track_data
 data2 <- wiki_hot_100s
-tracks <- read_csv("eda/data/track_info.csv")
-artists <- read_csv("eda/data/artist_info.csv")
-long_genres <- read_csv("eda/data/artist_genres.csv")
+tracks <- read_csv("data/track_info.csv")
+artists <- read_csv("data/artist_info.csv")
+long_genres <- read_csv("data/artist_genres.csv")
 
 # Data cleaning
 data2 <- data2 %>%
