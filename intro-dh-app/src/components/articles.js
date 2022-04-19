@@ -15,10 +15,10 @@ class Articles extends Component {
                             </p>
                         </div>
                         <div className="col py-4 text-end">
-                            <a href="#intro" className="text-decoration-none"><h4>Introduction</h4></a>
+                            {/* <a href="#intro" className="text-decoration-none"><h4>Introduction</h4></a>
                             <a href="#evolution" className="text-decoration-none"><h4>Evolution of Music Genres</h4></a>
                             <a href="#artists" className="text-decoration-none"><h4>Popular Artists</h4></a>
-                            <a href="#lyrics" className="text-decoration-none"><h4>Common Patterns in Lyrics</h4></a>
+                            <a href="#lyrics" className="text-decoration-none"><h4>Common Patterns in Lyrics</h4></a> */}
                         </div>
                     </div>
                 </div>
