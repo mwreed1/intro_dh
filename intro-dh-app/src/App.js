@@ -8,6 +8,9 @@ import {
 import Menu from "./components/navbar";
 import Index from "./components/index";
 import Articles from "./components/articles";
+import MichaelJackson from './components/michael-jackson';
+import TravisScott from './components/travis-scott';
+import BTS from './components/bts';
 
 class App extends Component {
 	render() {
@@ -17,6 +20,9 @@ class App extends Component {
 				<Routes>
 					<Route path="/" element={<Index />} />
 					<Route path="/articles" element={<Articles />} />
+					<Route path="/michael-jackson" element={<MichaelJackson />} />
+					<Route path="/travis-scott" element={<TravisScott />} />
+					<Route path="/bts" element={<BTS />} />
 				</Routes>
 			</div>
 		);

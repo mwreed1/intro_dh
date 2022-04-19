@@ -6,6 +6,13 @@
     padding: 4%;
 }
 
+.article-container {
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
 .header-container {
     padding-top: 4%;
     padding-left: 4%;

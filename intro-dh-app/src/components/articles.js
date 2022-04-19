@@ -21,6 +21,32 @@ class Articles extends Component {
                             <a href="#lyrics" className="text-decoration-none"><h4>Common Patterns in Lyrics</h4></a> */}
                         </div>
                     </div>
+                    <div className="row main-container flex-wrap gap-4 pt-0">
+                        <div class="card col px-0 py-0">
+                            <img src={require("../images/michael-jackson.jpeg")} class="card-img-top mx-0 w-100" alt="..."></img>
+                            <div class="card-body mx-3 my-3">
+                                <h5 class="card-title">Michael Jackson</h5>
+                                <p class="card-text">How the King of Pop created his own brand and became a major cultural icon</p>
+                                <a href="/michael-jackson" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                        <div class="card col px-0 py-0">
+                            <img src={require("../images/travis-scott.jpeg")} class="card-img-top" alt="..."></img>
+                            <div class="card-body mx-3 my-3">
+                                <h5 class="card-title">Travis Scott</h5>
+                                <p class="card-text">How the rap mogul's brash and bold personality relates to the Astroworld controversy</p>
+                                <a href="/travis-scott" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                        <div class="card col px-0 py-0">
+                            <img src={require("../images/bts.jpeg")} class="card-img-top" alt="..."></img>
+                            <div class="card-body mx-3 my-3">
+                                <h5 class="card-title">BTS</h5>
+                                <p class="card-text">How to Kpop boy band broke through the Korean music bubble</p>
+                                <a href="/bts" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="bg-dark white">
                     <div className="row main-container mx-4 align-content-between">
