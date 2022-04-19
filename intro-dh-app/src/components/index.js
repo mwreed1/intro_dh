@@ -26,7 +26,7 @@ class Index extends Component {
                     <div className="col w-50 header-container flex-wrap">
                         <h3 className="py-2">Evolution of Music Genres</h3>
                         <p>
-                            In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
+                            In the 70s, people were obsessed with rock, disco and soul. During the early 2000s, pop music became the next mainstream, while hip hop and rap formed as new genres. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
                         </p>
                     </div>
                     <div className="row main-container flex-wrap">
@@ -43,7 +43,7 @@ class Index extends Component {
                     <div className="col w-50 header-container flex-wrap">
                         <h3 className="py-2">Popular Artists</h3>
                         <p>
-                            In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
+                            Who were the top searched musicians and bands this year? Whether they became viral for their new album, a meme, or a tragic event, these were the top 5 most searched artists according to Google Trends. 
                         </p>
                     </div>
                     <div className="row main-container flex-wrap">
@@ -73,7 +73,7 @@ class Index extends Component {
                     <div className="col w-50 header-container flex-wrap">
                         <h3 className="py-2">Common Patterns in Lyrics</h3>
                         <p>
-                            In the 90s, people were obsessed with ___. During the early 2000s, it became ___. As technology advanced and editing software increased, new genres emerged as an increasing blend of older genres.
+                            Themes of love, joy, and hope have always bred itself in song lyrics. Here we show the top 8 most common words that appear in song titles and how they have evolved over decades of music.
                         </p>
                     </div>
                     <div className="row main-container flex-wrap">
