@@ -17,15 +17,15 @@ library(tidytext)
 ```
 
 ```{r data-token}
-access_token <- get_spotify_access_token()
+# access_token <- get_spotify_access_token()
 ```
 
 ```{r read-data}
 data1 <- spotify_track_data
 data2 <- wiki_hot_100s
-tracks <- read_csv("data/track_info.csv")
-artists <- read_csv("data/artist_info.csv")
-long_genres <- read_csv("data/artist_genres.csv")
+tracks <- read_csv("../data/track_info.csv")
+artists <- read_csv("../data/artist_info.csv")
+long_genres <- read_csv("../data/artist_genres.csv")
 data <- full_join(
   spotify_track_data, wiki_hot_100s,
   by = c("artist_name" = "artist", "track_name" = "title")
@@ -114,7 +114,14 @@ long_genres %>%
   arrange(desc(n)) %>%
   slice(1:25) %>%
   ggplot(aes(y = fct_inorder(genre, n), x = n)) +
-  geom_col()
+  geom_col() +
+  labs(
+    x = NULL,
+    y = "Genre",
+    title = "Distribution of specific genres",
+    caption = "Billboard top 100 songs"
+  ) +
+  theme_minimal()
 ```
 
 ```{r simple-bar, cache = T}
