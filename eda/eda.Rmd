@@ -250,3 +250,11 @@ track_data %>%
   theme(legend.position = "bottom", legend.direction = "horizontal")
 ```
 
+```{r}
+a <- track_data %>%
+  filter( year.x == 1980, no == 1) %>%
+  pull(track_name)
+
+a[[1]]
+```
+

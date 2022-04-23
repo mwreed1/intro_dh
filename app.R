@@ -3,6 +3,7 @@ library(tidyverse)
 library(spotifyr)
 library(billboard)
 library(tidytext)
+library(shiny)
 
 # API set-up
 # access_token <- get_spotify_access_token()
@@ -76,7 +77,15 @@ ui <- fluidPage(
                        min = 1960, max = 2016, value = 2000)
         ),
         mainPanel(
-          plotOutput("plot2")
+          strong("The following artists produced the most popular songs in the years you have selected: "),
+          br(),
+          textOutput("text1"),
+          br(),
+          strong("These are the corresponding hits: "),
+          br(),
+          textOutput("text2"),
+          br(),
+          plotOutput("plot2"),
         )
       )
     )
@@ -172,6 +181,26 @@ server <- function(input, output) {
       theme(legend.position = "bottom", legend.direction = "horizontal")
   })
   
+  songs <- reactive({
+    track_data %>%
+      filter(year.x %in% years(), no == 1) %>%
+      pull(track_name)
+  })
+  
+  artists <- reactive({
+    track_data %>%
+      filter(year.x %in% years(), no == 1) %>%
+      pull(artist_name)
+  })
+  
+  output$text1 <- renderText({
+    paste(artists(), collapse = ", ")
+  })
+  
+  
+  output$text2 <- renderText({
+    paste(songs(), collapse = ", ")
+  })
   
 }
 
