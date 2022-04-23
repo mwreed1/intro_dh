@@ -34,7 +34,7 @@ class Articles extends Component {
                             <img src={require("../images/travis-scott.jpeg")} class="card-img-top" alt="..."></img>
                             <div class="card-body mx-3 my-3">
                                 <h5 class="card-title">Travis Scott</h5>
-                                <p class="card-text">How the rap mogul's brash and bold personality relates to the Astroworld controversy</p>
+                                <p class="card-text">How the rap mogul's brash personality relates to the Astroworld controversy</p>
                                 <a href="/travis-scott" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
@@ -46,6 +46,14 @@ class Articles extends Component {
                                 <a href="/bts" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
+                        <div class="card col px-0 py-0">
+                            <img src={require("../images/taylor-swift.jpeg")} class="card-img-top" alt="..."></img>
+                            <div class="card-body mx-3 my-3">
+                                <h5 class="card-title">Taylor Swift</h5>
+                                <p class="card-text">How the country-turned-pop singer regained her creative freedom with "Taylor's Version"</p>
+                                <a href="/taylor-swift" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="bg-dark white">
@@ -53,7 +61,7 @@ class Articles extends Component {
                         <div className="col w-50">
                             <h6 className="mb-3 fw-bold">DATA</h6>
                             <p>
-                                This project was completed using React, Python and R. We analyzed Google search trends for popular music genres and famous artists, then ____. To find common patterns in lyrics, we performed text analysis on popular songs in 2022.
+                                This project was completed using React, Python and R. We looked at the top 100 songs on Billboard and utilized those songs for analysis using the Spotify API in order to find the popularity of various music genres and the frequency of the most common words in song titles by decade. We analyzed how Google search trends varied over time for the top most searched artists in 2021 and compared them across different regions within the US. To find common patterns in lyrics, we performed text analysis on popular songs in 2022.
                             </p>
                         </div>
                         <div className="col-auto w-25">

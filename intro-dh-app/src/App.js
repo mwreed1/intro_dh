@@ -11,6 +11,7 @@ import Articles from "./components/articles";
 import MichaelJackson from './components/michael-jackson';
 import TravisScott from './components/travis-scott';
 import BTS from './components/bts';
+import TaylorSwift from './components/taylor-swift';
 
 class App extends Component {
 	render() {
@@ -23,6 +24,7 @@ class App extends Component {
 					<Route path="/michael-jackson" element={<MichaelJackson />} />
 					<Route path="/travis-scott" element={<TravisScott />} />
 					<Route path="/bts" element={<BTS />} />
+					<Route path="/taylor-swift" element={<TaylorSwift />} />
 				</Routes>
 			</div>
 		);
