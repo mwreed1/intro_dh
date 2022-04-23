@@ -57,7 +57,8 @@ ui <- fluidPage(
       sidebarLayout(
         sidebarPanel(
           sliderInput("slider1", "Select date range",
-                      min = 1960, max = 2016, value = c(1960, 2016))
+                      min = 1960, max = 2015, value = c(1960, 2015), sep = "", 
+                      step = 5)
         ),
         mainPanel(
           plotOutput("plot1")

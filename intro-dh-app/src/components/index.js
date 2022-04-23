@@ -14,7 +14,8 @@ class Index extends Component {
                             <p>
                                 By analyzing Google Trends and Spotify's API, we can explore the rise and fall of certain music trends over the years, whether it be the emergence of new genres, popular artists, and even major events that exploded over the news.
                             </p>
-                            <a href="https://mwreed1.shinyapps.io/intro_dh/" class="btn btn-primary mt-3">View Interactive Visualizations</a>
+                            {/* <a href="https://mwreed1.shinyapps.io/intro_dh/" class="btn btn-primary mt-3">View Interactive Visualizations</a> */}
+                            <iframe height="500" width="220%" frameborder="no" src="https://mwreed1.shinyapps.io/intro_dh/"> </iframe>
                         </div>
                         <div className="col py-4 text-end">
                             <a href="#intro" className="text-decoration-none"><h4>Introduction</h4></a>
