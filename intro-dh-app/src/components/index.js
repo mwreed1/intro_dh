@@ -14,6 +14,7 @@ class Index extends Component {
                             <p>
                                 By analyzing Google Trends and Spotify's API, we can explore the rise and fall of certain music trends over the years, whether it be the emergence of new genres, popular artists, and even major events that exploded over the news.
                             </p>
+                            <a href="https://mwreed1.shinyapps.io/intro_dh/" class="btn btn-primary mt-3">View Interactive Visualizations</a>
                         </div>
                         <div className="col py-4 text-end">
                             <a href="#intro" className="text-decoration-none"><h4>Introduction</h4></a>
@@ -90,7 +91,7 @@ class Index extends Component {
                         <div className="col w-50">
                             <h6 className="mb-3 fw-bold">DATA</h6>
                             <p>
-                                This project was completed using React, Python and R. We analyzed Google search trends for popular music genres and famous artists, then ____. To find common patterns in lyrics, we performed text analysis on popular songs in 2022.
+                            This project was completed using React, Python and R. We looked at the top 100 songs on Billboard and utilized those songs for analysis using the Spotify API in order to find the popularity of various music genres and the frequency of the most common words in song titles by decade. We analyzed how Google search trends varied over time for the top most searched artists in 2021 and compared them across different regions within the US. To find common patterns in lyrics, we performed text analysis on popular songs in 2022.
                             </p>
                         </div>
                         <div className="col-auto w-25">
