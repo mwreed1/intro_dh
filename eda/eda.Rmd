@@ -152,7 +152,7 @@ long_genres %>%
   labs(
     x = "Frequency",
     y = "Genre",
-    title = "Frequency of dfferent genres",
+    title = "Frequency of different genres",
     subtitle = "By artist",
     caption = "Billboard top 100 songs"
   ) +
