@@ -15,7 +15,7 @@ class Index extends Component {
                                 By analyzing Google Trends and Spotify's API, we can explore the rise and fall of certain music trends over the years, whether it be the emergence of new genres, popular artists, and even major events that exploded over the news.
                             </p>
                             {/* <a href="https://mwreed1.shinyapps.io/intro_dh/" class="btn btn-primary mt-3">View Interactive Visualizations</a> */}
-                            <iframe height="500" width="220%" frameborder="no" src="https://mwreed1.shinyapps.io/intro_dh/"> </iframe>
+                            <iframe height="500" width="203%" frameborder="no" src="https://mwreed1.shinyapps.io/intro_dh/"> </iframe>
                         </div>
                         <div className="col py-4 text-end">
                             <a href="#intro" className="text-decoration-none"><h4>Introduction</h4></a>
@@ -34,9 +34,11 @@ class Index extends Component {
                     <div className="row main-container flex-wrap">
                         <div className="col me-4">
                             <img className="mb-4" src={require("../images/decade-genre.png")} width="100%"></img>
+                            <p>Here we split the prevalence of different genres by decade. In order to do so, we used Spotify’s genre classifications and simplified them into the genres seen here. Overall, it seems pop music has become more popular over time, while rock music has decreased in popularity.</p>
                         </div>
                         <div className="col ms-4 text-end">
                             <img className="mb-4" src={require("../images/frequency-genre.png")} width="100%"></img>
+                            <p className="text-start">Here, we looked at the frequency of genres used by the artists of the Billboard top 100 songs from 1960 - 2015. Rock was the most popular, along with pop and soul.</p>
                             <img className="mb-4" src={require("../images/genre-bar.png")} width="100%"></img>
                         </div>
                     </div>
@@ -81,9 +83,11 @@ class Index extends Component {
                     <div className="row main-container flex-wrap">
                         <div className="col me-4">
                             <img className="mb-4" src={require("../images/decade-frequency-word.png")} width="100%"></img>
+                            <p>Likewise, we looked at the prevalence of the 8 most common words in song titles overall. Love is the most popular in all the decades. The slang word “wanna” peaked in 1990.</p>
                         </div>
                         <div className="col ms-4 text-end">
                             <img className="mb-4" src={require("../images/freq-word-song-title.png")} width="100%"></img>
+                            <p className="text-start">Here we looked at the overall most common words in song lyrics in the Billboard top 100 songs from 1960 - 2015. </p>
                         </div>
                     </div>
                 </div>
