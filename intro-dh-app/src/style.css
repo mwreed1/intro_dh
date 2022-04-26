@@ -19,6 +19,16 @@
     padding-right: 4%;
 }
 
+h5.subtitle {
+    margin-top: 20px;
+    padding-top: 16px;
+}
+
 h6 {
     letter-spacing: 1px; 
+}
+
+ul {
+    margin-bottom: 80px;
+    padding-bottom: 80px;
 }

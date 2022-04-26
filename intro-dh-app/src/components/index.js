@@ -90,6 +90,36 @@ class Index extends Component {
                             <p className="text-start">Here we looked at the overall most common words in song lyrics in the Billboard top 100 songs from 1960 - 2015. </p>
                         </div>
                     </div>
+                    <div className="row header-container flex-wrap pt-0 mt-0">
+                        <h4 className="mb-4">Sentiment Analysis</h4>
+                        <div className="col me-4">
+                            <p>
+                            We have used the widely used TextBlob tool for sentiment analysis, which divided the text based on overall sentiment polarity (-1 for extremely negative and +1 for extremely positive, and most text is usually in the range). We have scrapped 29389 songs lyrics spanning six decades from the web using various sites, and we obtained a database of weekly hits chart, which becomes helpful to achieve this.
+                            </p>
+                            <p className="mb-4">
+                            Based on the TextBlob score of each song's lyrics, the overall polarity of sentiment is positive, with the general trend of score getting lower, i.e., song inclining to more negative polarity with time.
+                            </p>
+                            <h5 className="subtitle">Limitations</h5>
+                            <p>
+                            The first one is the limitation of our tool; we could only divide the lyrics based on negative and positive polarity criteria, which is very detailed. An alternative could be the IBM Watson Tone analyzer, but it being a paid service (after 500 runs), we could imply that. For future research, given we have more resources, we could imply these paid services to have an in-depth understanding of sentiment and linguistic semantics.
+                            </p>
+                            <p className="mb-4">
+                            The second issue was with stopwords. We scrapped our lyrics from the web, and despite a good effort, a lot of content from the website (words like Lyrics, artist_name, lyricsome, website_name) still sipped it, and manual removal of each word from each song lyrics went beyond the scope of our project. The future project will try include a more refined dataset for song lyrics.
+                            </p>
+                            <h5 className="subtitle">Links and Data Sites</h5>
+                            <p className="mb-1">
+                            For more info, visit:
+                            </p>
+                            <ul className="mt-0 mb-4">
+                                <li>Data source and root project: <a target="_blank" href="https://github.com/salimzubair/lyric-sentiment">https://github.com/salimzubair/lyric-sentiment</a></li>
+                                <li>About TextBlob(the tool we used for Sentiment): <a target="_blank" href="https://towardsdatascience.com/my-absolute-go-to-for-sentiment-analysis-textblob-3ac3a11d524">https://towardsdatascience.com/my-absolute-go-to-for-sentiment-analysis-textblob-3ac3a11d524</a></li>
+                                <li>More information about KeyBERT: <a target="_blank" href="https://maartengr.github.io/KeyBERT/">https://maartengr.github.io/KeyBERT/</a></li>
+                            </ul>
+                        </div>
+                        <div className="col ms-4">
+                            <img className="mb-4" src={require("../images/polarity.png")} width="100%"></img>
+                        </div>
+                    </div>
                 </div>
                 <div className="bg-dark white">
                     <div className="row main-container mx-4 align-content-between">
