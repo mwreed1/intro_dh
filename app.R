@@ -14,7 +14,7 @@ data2 <- wiki_hot_100s
 tracks <- read_csv("data/track_info.csv")
 artists <- read_csv("data/artist_info.csv")
 long_genres <- read_csv("data/artist_genres.csv")
-
+  
 # Data cleaning
 data2 <- data2 %>%
   mutate(
@@ -41,10 +41,27 @@ track_data <- inner_join(
   data, 
   tracks,
   by = c("track_id" = "id")
-)
+) %>%
+  distinct()
 
 big_data <- left_join(track_data, artists, by = c("artist_id" = "id"))
 
+simple_genre_d <- long_genres %>%
+  mutate(
+    simple_genre = case_when(
+      str_detect(genres, "pop") ~ "pop",
+      str_detect(genres, "rock") ~ "rock",
+      str_detect(genres, "r&b") | str_detect(genres, "rhythm and blues") ~ "r&b",
+      str_detect(genres, "soul") ~ "soul",
+      str_detect(genres, "country") ~ "country",
+      str_detect(genres, "rap") ~ "rap",
+      str_detect(genres, "disco") ~ "disco",
+      str_detect(genres, "hip hop") ~ "hip hop",
+      TRUE ~ "other"
+    )
+  )
+
+genre_list <- simple_genre_d %>% distinct(simple_genre) %>% pull(simple_genre)
 
 # Start App
 ui <- fluidPage(
@@ -58,7 +75,13 @@ ui <- fluidPage(
         sidebarPanel(
           sliderInput("slider1", "Select date range",
                       min = 1960, max = 2015, value = c(1960, 2015), sep = "", 
-                      step = 5)
+                      step = 5),
+          checkboxGroupInput(
+            "genreInput",
+            "Select genres you want to explore",
+            choices = genre_list,
+            selected = genre_list
+          )
         ),
         mainPanel(
           plotOutput("plot1")
@@ -97,23 +120,11 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   data_genre <- reactive({
-    long_genres %>%
+    simple_genre_d %>%
       filter(
         input$slider1[1] <= med_release,
-        input$slider1[2] >= med_release
-      ) %>%
-      mutate(
-        simple_genre = case_when(
-          str_detect(genres, "pop") ~ "pop",
-          str_detect(genres, "rock") ~ "rock",
-          str_detect(genres, "r&b") | str_detect(genres, "rhythm and blues") ~ "r&b",
-          str_detect(genres, "soul") ~ "soul",
-          str_detect(genres, "country") ~ "country",
-          str_detect(genres, "rap") ~ "rap",
-          str_detect(genres, "disco") ~ "disco",
-          str_detect(genres, "hip hop") ~ "hip hop",
-          TRUE ~ "other"
-        )
+        input$slider1[2] >= med_release,
+        simple_genre %in% input$genreInput
       ) %>%
       select(-genres) %>%
       distinct() %>%
